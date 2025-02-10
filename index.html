@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Promise Day Muffin</title>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #ff9eaa;
+            --accent-color: #ffd6d6;
+            --text-color: #2f3542;
+            --gradient-start: #ff758c;
+            --gradient-end: #ff7eb3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, 
+                var(--gradient-start), 
+                var(--gradient-end), 
+                var(--secondary-color), 
+                var(--accent-color));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: clamp(1rem, 5vw, 3rem);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: clamp(15px, 3vw, 30px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            width: min(90%, 600px);
+            position: relative;
+            transform-style: preserve-3d;
+            animation: containerEntrance 1.5s ease-out;
+            backdrop-filter: blur(10px);
+            margin: clamp(0.5rem, 2vw, 2rem);
+        }
+
+        @keyframes containerEntrance {
+            0% {
+                transform: translateY(100px) rotateX(-20deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) rotateX(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            padding: 0 clamp(0.5rem, 2vw, 1rem);
+            line-height: 1.3;
+            animation: fadeIn 2s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            padding: 0 clamp(0.5rem, 2vw, 1rem);
+            animation: slideUp 2s ease;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            background: #ff4757;
+            width: 30px;
+            height: 50px;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .heart:before {
+            transform: rotate(-45deg);
+            left: 30px;
+        }
+
+        .heart:after {
+            transform: rotate(45deg);
+            left: 0;
+        }
+
+        .promises {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: clamp(0.8rem, 2vw, 1.2rem);
+            margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+            width: 100%;
+        }
+
+        .promises li {
+            padding: clamp(0.8rem, 2vw, 1.2rem);
+            margin: 0 clamp(0.5rem, 2vw, 1rem);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9), 
+                rgba(255, 255, 255, 0.7));
+            border-radius: clamp(8px, 2vw, 15px);
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            line-height: 1.5;
+            border: 1px solid rgba(255, 71, 87, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promises li:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 71, 87, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
+        }
+
+        .promises li::before {
+            content: '❤';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .promises li:hover::before {
+            left: 10px;
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            font-style: italic;
+            color: var(--primary-color);
+            margin-top: clamp(1.5rem, 4vw, 3rem);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            position: relative;
+            padding-top: clamp(1rem, 3vw, 2rem);
+        }
+
+        .signature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+            animation: lineGrow 2s ease-out;
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 50px; }
+        }
+
+        .love-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            transform-style: preserve-3d;
+        }
+
+        .love-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        .love-button:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.2rem;
+                margin: 0.5rem;
+            }
+
+            .promises li {
+                padding: 0.8rem;
+                margin: 0 0.5rem;
+            }
+
+            h1 {
+                margin-bottom: 1rem;
+            }
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            .signature {
+                margin-top: 1.5rem !important;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding: 1.8rem;
+                margin: 1rem;
+            }
+
+            .promises li {
+                padding: 1rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+
+            .promises {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 0.8rem;
+            }
+
+            h1 {
+                font-size: clamp(1.2rem, 4vw, 2rem);
+                margin-bottom: 0.8rem;
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Optimize heart animations for different screen sizes */
+        @media (max-width: 768px) {
+            .floating-hearts div {
+                font-size: clamp(10px, 3vw, 15px) !important;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .promises li {
+                padding-right: 2.5rem;
+            }
+
+            .promises li::after {
+                right: 10px;
+                opacity: 1;
+            }
+        }
+
+        /* High-DPI screen optimizations */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .container {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts"></div>
+    <div class="container">
+        <h1>Happy Promise Day, Muffin 😋😋</h1>
+        <p>Neeche dekh hearts aise pop kar rhe upar goated animation hehe</p>
+        <ul class="promises">
+            <li>I promise to love you more everyday ❤️</li>
+            <li>I promise to be your strength when you need support 😎</li>
+            <li>I promise to make you smile even on your toughest days 🫂</li>
+            <li>I promise to always listen to you and understand you 🤝</li>
+            <li>I promise to be your best friend forever 😋</li>
+            <li>I promise to cherish every moment we spend together 💖</li>
+            <li>I promise to stand by you through thick and thin 🌟</li>
+        </ul>
+        <p>You make my life complete, and I will always be yours babygirl ❤️</p>
+        <!-- <button class="love-button" onclick="showLove()">Send Love ❤️</button> -->
+        <div class="signature">Yours only,<br>Ishi Pishi</div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            document.querySelector('.floating-hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function showLove() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            document.querySelector('.love-button').style.animation = 'heartBeat 0.5s ease';
+            setTimeout(() => {
+                document.querySelector('.love-button').style.animation = '';
+            }, 500);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Add hover effect to promises
+        document.querySelectorAll('.promises li').forEach(promise => {
+            promise.addEventListener('mouseenter', () => {
+                promise.style.paddingLeft = '2.5rem';
+            });
+            promise.addEventListener('mouseleave', () => {
+                promise.style.paddingLeft = '1rem';
+            });
+        });
+    </script>
+</body>
+</html> 
